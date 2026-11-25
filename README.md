@@ -1,21 +1,42 @@
-# Bora Bibliar
+# Bora Bibliar · Christian Hub
 
-Community hub para estudar, fazer devocional, ler, jogar e crescer junto.
+Hub cristão para estudar a Bíblia em comunidade: devocional diário, calendário bíblico,
+biblioteca, desafios com XP e ranking, mural de oração e testemunhos e encontros God Hour.
 
-## Rodar no computador
-O app precisa ser aberto por um servidor local (abrir o `index.html` direto funciona, mas sem o modo instalável/offline).
+Feito em HTML, CSS e JavaScript puros (sem build). Dados e login pelo [Supabase](https://supabase.com).
 
-- **VS Code:** instale a extensão *Live Server*, clique com o botão direito no `index.html` → *Open with Live Server*.
+## Como funciona
+
+- **Sem configuração** (`js/config.js` vazio): o app roda só no navegador (modo local).
+- **Com Supabase** (`js/config.js` preenchido): login por e-mail e senha. Só cria conta quem
+  tiver o e-mail liberado pela administração (Configurações → Membros liberados).
+
+## Publicar uma atualização
+
+1. Aumente `APP_VERSION` em `js/app.js` **e** `VERSION` em `sw.js`.
+2. `git commit` e `git push`. O GitHub Pages publica sozinho em 1–2 minutos.
+
+## Banco de dados
+
+`supabase/schema.sql` cria tabelas, regras de acesso (RLS) e funções. Rodar uma vez no SQL Editor
+do Supabase. A configuração inicial com dados privados (e-mail da administração, link do grupo,
+estante inicial) fica num arquivo local que não vai para o GitHub.
 
 ## Estrutura
-| Arquivo | O que é |
-|---|---|
-| `js/pages.js` | Menu lateral (`NAV`) e as telas (`PAGES`). Módulo novo começa aqui. |
-| `js/store.js` | Onde os dados são salvos. Hoje no navegador; depois, Supabase. |
-| `js/app.js` | Rotas, menu no celular, backup, atualizações. |
-| `css/styles.css` | Cores e visual (paleta no topo). |
-| `sw.js` | Modo app instalável/offline. |
-| `supabase/schema.sql` | Banco para a fase multiusuário (ainda não usado). |
 
-## Publicar uma nova versão
-Aumente `APP_VERSION` em `js/app.js` **e** `VERSION` em `sw.js`.
+```
+index.html            página única
+css/styles.css        visual
+js/config.js          conexão com o Supabase
+js/store.js           dados (Store.get / Store.set)
+js/cloud.js           login e sincronização com o Supabase
+js/pages.js           menu, Dashboard, Perfil, Configurações
+js/devocional.js      Meu devocional
+js/calendario.js      Calendário bíblico + avisos + presença
+js/biblioteca.js      Biblioteca, minha leitura, resenhas
+js/desafios.js        níveis, medalhas, desafios, ranking
+js/comunidade.js      pedidos de oração e testemunhos
+js/embreve.js         Plano de estudos, Materiais, Jogos, God Hour
+js/membros.js         membros liberados (administração)
+sw.js                 app instalável / offline
+```

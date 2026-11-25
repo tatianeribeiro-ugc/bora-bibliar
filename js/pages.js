@@ -104,6 +104,7 @@ const PAGES = {
         <p class="muted">Você entrou como <strong>${esc(Cloud.email())}</strong>. Seus dados ficam salvos na sua conta e aparecem em qualquer aparelho em que você entrar.</p>
         <div class="actions">
           <button class="btn btn-soft" data-action="export">${icon('download', 16)} baixar cópia dos meus dados</button>
+          <button class="btn btn-soft" data-action="import">${icon('upload', 16)} importar backup</button>
           <button class="btn btn-danger" data-action="logout">sair da conta</button>
         </div>
       </div>
