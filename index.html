@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bora Bibliar</title>
+<meta name="description" content="Christian hub para estudar, fazer devocional, ler e crescer junto." />
+<meta name="theme-color" content="#4F3F84" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="./icons/icon.svg" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..800,0..100,0..1&family=Nunito:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+    <a class="brand" href="#/dashboard">
+      <span class="brand-mark" data-icon="bookOpen"></span>
+      <span class="brand-text">
+        <strong>Bora Bibliar</strong>
+        <small>Christian Hub</small>
+      </span>
+    </a>
+    <nav class="nav" id="nav"></nav>
+    <a class="me" href="#/perfil" id="meCard">
+      <span class="avatar" id="meAvatar">B</span>
+      <span class="me-text"><strong id="meName">Seu nome</strong><small>ver perfil</small></span>
+    </a>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu" data-icon="menu"></button>
+      <div class="page-head">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p id="pageSub"></p>
+      </div>
+    </header>
+    <section class="content" id="content"></section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importFile" accept="application/json" hidden />
+
+<script src="./js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="./js/icons.js"></script>
+<script src="./js/store.js"></script>
+<script src="./js/cloud.js"></script>
+<script src="./js/pages.js"></script>
+<script src="./js/desafios.js"></script>
+<script src="./js/devocional.js"></script>
+<script src="./js/calendario.js"></script>
+<script src="./js/biblioteca.js"></script>
+<script src="./js/comunidade.js"></script>
+<script src="./js/embreve.js"></script>
+<script src="./js/membros.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

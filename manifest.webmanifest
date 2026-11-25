@@ -1,0 +1,15 @@
+{
+  "name": "Bora Bibliar",
+  "short_name": "Bora Bibliar",
+  "description": "Community hub para estudar, fazer devocional, ler e crescer junto.",
+  "lang": "pt-BR",
+  "start_url": "./index.html#/dashboard",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFF9F2",
+  "theme_color": "#4F3F84",
+  "icons": [
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
