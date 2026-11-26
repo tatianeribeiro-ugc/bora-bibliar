@@ -1,5 +1,5 @@
 // Aumente VERSION a cada publicação (junto com APP_VERSION em js/app.js).
-const VERSION = 'bb-0.12.0';
+const VERSION = 'bb-0.13.0';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icons/icon.svg', './css/styles.css',
   './js/config.js', './js/icons.js', './js/store.js', './js/cloud.js', './js/pages.js', './js/desafios.js', './js/devocional.js', './js/calendario.js', './js/biblioteca.js', './js/comunidade.js', './js/embreve.js', './js/membros.js', './js/app.js',
