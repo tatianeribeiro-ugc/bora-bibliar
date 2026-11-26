@@ -1,4 +1,4 @@
-// Páginas "em breve": Plano de estudos, Materiais e PDFs, Jogos & Quiz e God Hour (encontros).
+// Páginas "em breve": Plano de estudos, Materiais e PDFs e God Hour (encontros). Jogos & Quiz ficam em jogos.js.
 // Já deixam as ideias organizadas (abas, pontuação) para quando cada módulo ganhar vida.
 
 // Pontos planejados para os módulos futuros (usados nas telas de "em breve").
@@ -48,41 +48,6 @@ PAGES.materiais = {
     text: 'Em breve, aqui vão estar os <strong>materiais complementares às aulas do Plano de Estudos</strong> e outros <strong>estudos por escrito</strong>, pra você <strong>baixar ou ler direto no app</strong>.',
     bullets: ['Apostilas e resumos de cada aula', 'Estudos bíblicos escritos sobre vários temas', 'Baixar o PDF ou só ler online', 'Tudo organizado por tema'],
   }),
-};
-
-// ---------- Jogos & Quiz ----------
-let gameTab = 'quiz';
-PAGES.jogos = {
-  ...PAGES.jogos,
-  sub: 'aprender brincando',
-  render: () => {
-    const q = XP_SOON.quiz;
-    const body = {
-      quiz: soonCard({
-        emoji: '❓', title: 'Quiz bíblico',
-        text: 'Perguntas com <strong>alternativas</strong>, separadas por <strong>nível de dificuldade</strong>. Quanto mais difícil, mais XP por acerto!',
-        chips: [`🟢 fácil <b>+${q.facil} XP</b> por acerto`, `🟡 médio <b>+${q.medio} XP</b> por acerto`, `🔴 difícil <b>+${q.dificil} XP</b> por acerto`],
-      }),
-      frase: soonCard({
-        emoji: '✍️', title: 'Complete a frase',
-        text: 'Um versículo aparece com uma parte faltando, e você completa. Ótimo pra <strong>decorar a Palavra</strong> brincando.',
-        chips: [`✍️ cada frase certa <b>+${XP_SOON.completeFrase} XP</b>`],
-      }),
-      quem: soonCard({
-        emoji: '🗣️', title: 'Quem disse isso?',
-        text: 'Uma frase da Bíblia e algumas opções de personagem: <strong>quem disse isso?</strong> Moisés, Davi, Paulo, Pedro...',
-        chips: [`🗣️ cada acerto <b>+${XP_SOON.quemDisse} XP</b>`],
-      }),
-    }[gameTab];
-    return `${soonTabs(gameTab, [['quiz', '❓ quiz'], ['frase', '✍️ complete a frase'], ['quem', '🗣️ quem disse isso?']])}${body}`;
-  },
-  onClick: (e) => {
-    const t = e.target.closest('[data-soontab]');
-    if (!t) return;
-    gameTab = t.dataset.soontab;
-    refreshContent();
-    document.querySelector(`[data-soontab="${gameTab}"]`)?.focus();
-  },
 };
 
 // ---------- God Hour (encontros ao vivo) ----------

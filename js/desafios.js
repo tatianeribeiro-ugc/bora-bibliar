@@ -322,7 +322,8 @@ const Game = (() => {
           <span>📖 devocional <b>+${XP_RULES.devocional}</b></span>
           ${Object.values(DIFFICULTY).map((d) => `<span>🎯 desafio ${d.label} <b>+${d.xp}</b></span>`).join('')}
           <span>📚 livro concluído <b>+${XP_RULES.livro}</b></span>
-          <span class="soon-rule">🎮 jogos e vídeos <b>em breve</b></span>
+          <span>🎮 acerto nos jogos <b>+${XP_SOON.quiz.facil}</b> a <b>+${XP_SOON.quiz.dificil}</b></span>
+          <span class="soon-rule">🎬 vídeo aulas <b>em breve</b></span>
         </div>
       </div>
 
