@@ -1,5 +1,5 @@
 // Ao publicar uma nova versão: aumente APP_VERSION aqui E a constante VERSION em sw.js.
-const APP_VERSION = '0.16.1';
+const APP_VERSION = '0.16.2';
 
 const $ = (sel) => document.querySelector(sel);
 
