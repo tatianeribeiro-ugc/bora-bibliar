@@ -387,8 +387,27 @@ const Cloud = (() => {
   const allow = async (email) => q(sb.from('allowed_emails').insert({ email: email.toLowerCase().trim() }));
   const disallow = async (email) => q(sb.from('allowed_emails').delete().eq('email', email));
 
+  // Materiais e PDFs: arquivos num bucket privado (só quem está logado baixa; só admin envia).
+  const materials = async () => q(sb.from('materials').select('*').order('created_at', { ascending: false }));
+  async function addMaterial(file, meta) {
+    const id = 'm' + Date.now().toString(36);
+    const safe = file.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w.-]+/g, '-').toLowerCase();
+    const path = `${id}/${safe}`;
+    await q(sb.storage.from('materiais').upload(path, file, { contentType: file.type || 'application/pdf' }));
+    try {
+      await q(sb.from('materials').insert({ id, title: meta.title, description: meta.description || '', path, size: file.size }));
+    } catch (e) { await sb.storage.from('materiais').remove([path]); throw e; }
+  }
+  async function removeMaterial(m) {
+    await q(sb.from('materials').delete().eq('id', m.id));
+    await sb.storage.from('materiais').remove([m.path]);
+  }
+  const materialUrl = async (path, downloadName) =>
+    (await q(sb.storage.from('materiais').createSignedUrl(path, 600, downloadName ? { download: downloadName } : undefined))).signedUrl;
+
   return {
     enabled, start, signOut, refreshShared, attend, members, allow, disallow,
+    materials, addMaterial, removeMaterial, materialUrl,
     userId: () => user?.id || null,
     email: () => user?.email || '',
     monthKey,

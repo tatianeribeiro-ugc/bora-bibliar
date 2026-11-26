@@ -281,3 +281,5 @@ revoke all on function public.excluir_post(text) from public, anon;
 revoke all on function public.excluir_resenha(text) from public, anon;
 grant execute on function public.excluir_post(text) to authenticated;
 grant execute on function public.excluir_resenha(text) to authenticated;
+
+-- Materiais e PDFs (bucket privado): ver supabase/materiais.sql

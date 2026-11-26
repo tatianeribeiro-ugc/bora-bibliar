@@ -1,4 +1,4 @@
-// Páginas "em breve": Plano de estudos, Materiais e PDFs e God Hour (encontros). Jogos & Quiz ficam em jogos.js.
+// Páginas "em breve": Plano de estudos e God Hour (encontros). Jogos & Quiz ficam em jogos.js; Materiais em materiais.js.
 // Já deixam as ideias organizadas (abas, pontuação) para quando cada módulo ganhar vida.
 
 // Pontos planejados para os módulos futuros (usados nas telas de "em breve").
@@ -35,18 +35,6 @@ PAGES.plano = {
     text: 'Em breve, aqui você vai encontrar <strong>aulas gravadas sobre temas bíblicos</strong>, organizadas em trilhas pra você estudar no seu ritmo. E o melhor: <strong>cada aula assistida soma XP</strong> pro seu nível e pro ranking do mês.',
     bullets: ['Aulas gravadas sobre temas bíblicos', 'Trilhas de estudo com o seu progresso', 'Materiais complementares em “Materiais e PDFs”', 'Conta pros desafios de aulas (1ª aula, 3 aulas...)'],
     chips: [`🎬 aula assistida <b>+${XP_SOON.aula} XP</b>`],
-  }),
-};
-
-// ---------- Materiais e PDFs ----------
-PAGES.materiais = {
-  ...PAGES.materiais,
-  sub: 'materiais complementares e estudos escritos',
-  render: () => soonCard({
-    emoji: '📂',
-    title: 'Um espaço pra aprofundar ainda mais',
-    text: 'Em breve, aqui vão estar os <strong>materiais complementares às aulas do Plano de Estudos</strong> e outros <strong>estudos por escrito</strong>, pra você <strong>baixar ou ler direto no app</strong>.',
-    bullets: ['Apostilas e resumos de cada aula', 'Estudos bíblicos escritos sobre vários temas', 'Baixar o PDF ou só ler online', 'Tudo organizado por tema'],
   }),
 };
 
