@@ -41,6 +41,17 @@ const Devo = (() => {
     a[k] = { ...a[k], ...patch };
     Store.set('devotionals', a);
   }
+  // ---------- plano de 30 dias (sugestão que começa no dia em que a pessoa entra no Hub) ----------
+  function ensurePlan() {
+    if (!Store.get('devoPlan')?.start) Store.set('devoPlan', { start: todayKey() });
+  }
+  function suggestion(k) {
+    const start = Store.get('devoPlan')?.start;
+    if (!start) return null;
+    const i = Math.round((dateOf(k) - dateOf(start)) / 864e5);
+    return i >= 0 && i < PLANO_30.length ? { day: i + 1, ...PLANO_30[i] } : null;
+  }
+
   const hasContent = (e) => TEXT_KEYS.some((f) => (e[f] || '').trim());
   const statusOf = (e) => (e.done ? 'done' : hasContent(e) ? 'started' : '');
 
@@ -66,11 +77,13 @@ const Devo = (() => {
   function dayChip(k, today) {
     const e = entry(k);
     const d = dateOf(k);
+    const sug = e.ref ? null : suggestion(k);
+    const ref = e.ref || sug?.ref || '';
     const cls = ['day', k === selected && 'sel', k === today && 'today', statusOf(e)].filter(Boolean).join(' ');
-    return `<button class="${cls}" data-day="${k}" aria-pressed="${k === selected}" aria-label="${esc(long(k))}${e.ref ? ': ' + esc(e.ref) : ''}">
+    return `<button class="${cls}" data-day="${k}" aria-pressed="${k === selected}" aria-label="${esc(long(k))}${ref ? (sug ? ': sugestão ' : ': ') + esc(ref) : ''}">
       <span class="day-wd">${WD[d.getDay()]}</span>
       <span class="day-n">${d.getDate()}</span>
-      <span class="day-ref">${esc(e.ref || '')}</span>
+      <span class="day-ref ${sug ? 'sug' : ''}">${esc(ref)}</span>
       <span class="day-dot" aria-hidden="true">${e.done ? icon('check', 12) : ''}</span>
     </button>`;
   }
@@ -107,9 +120,24 @@ const Devo = (() => {
           ${week.map((k) => `
             <label class="plan-row ${k === today ? 'today' : ''}">
               <span>${WD[dateOf(k).getDay()]} · ${short(k)}</span>
-              <input data-plan="${k}" value="${esc(entry(k).ref)}" placeholder="Ex.: Salmos 23" maxlength="80" />
+              <input data-plan="${k}" value="${esc(entry(k).ref)}" placeholder="${esc(suggestion(k)?.ref || 'Ex.: Salmos 23')}" maxlength="80" />
             </label>`).join('')}
         </div>
+      </div>` : '';
+
+    const sug = suggestion(selected);
+    const using = sug && (e.ref || '').trim() === sug.ref;
+    const sugCard = sug ? `
+      <div class="card devo-sug">
+        <span class="devo-sug-ico" aria-hidden="true">💡</span>
+        <div class="devo-sug-txt">
+          <small>sugestão do dia · plano de 30 dias · dia ${sug.day} de ${PLANO_30.length}</small>
+          <strong>${esc(sug.tema)}</strong>
+          <span class="devo-sug-ref">${icon('bookOpen', 14)} ${esc(sug.ref)}</span>
+          <span class="devo-sug-q">Pra pensar: ${esc(sug.pensar)}</span>
+        </div>
+        ${using ? '<span class="answered-badge">✓ leitura do dia</span>'
+          : `<button class="btn btn-soft btn-sm" data-devo="usesug">${e.ref ? 'trocar por esta' : 'usar esta leitura'}</button>`}
       </div>` : '';
 
     return `
@@ -127,6 +155,7 @@ const Devo = (() => {
 
       <div class="week">${week.map((k) => dayChip(k, today)).join('')}</div>
       ${plan}
+      ${sugCard}
 
       <div class="card devo">
         <div class="devo-head">
@@ -193,6 +222,7 @@ const Devo = (() => {
     if (a === 'plan') { planOpen = !planOpen; rerender(planOpen ? '[data-plan]' : '[data-devo="plan"]'); }
     if (a === 'done') { setDone(selected, true); rerender('[data-devo="undo"]'); toast(`Devocional concluído! +${XP_PER_DAY} XP`); }
     if (a === 'undo') { setDone(selected, false); rerender('[data-devo="done"]'); }
+    if (a === 'usesug') { const s = suggestion(selected); if (s) { save(selected, { ref: s.ref }); rerender('.ref-field input'); } }
   }
 
   function onInput(e) {
@@ -217,7 +247,7 @@ const Devo = (() => {
   function onEnter() { selected = pendingDay || todayKey(); pendingDay = null; }
   function openDay(k) { pendingDay = k; location.hash = '#/devocional'; }
 
-  return { render, onClick, onInput, onEnter, openDay, streak, entry, todayKey };
+  return { render, onClick, onInput, onEnter, openDay, streak, entry, todayKey, ensurePlan, suggestion };
 })();
 
 PAGES.devocional = {

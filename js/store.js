@@ -13,6 +13,7 @@ const Store = (() => {
     profile: { name: '', bio: '', church: '', role: 'admin' },
     xp: [], // { at, action, points } — base do ranking
     devotionals: {}, // { 'AAAA-MM-DD': { ref, resumo, ..., done } }
+    devoPlan: null, // plano de 30 dias { start: 'AAAA-MM-DD' } (começa no 1º acesso)
     events: [], // compromissos pessoais { id, date, time, title, notes, tagId }
     tags: [ // etiquetas pessoais, editáveis
       { id: 't-devocional', name: 'Devocional', color: 'gold' },

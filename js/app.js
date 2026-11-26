@@ -1,5 +1,5 @@
 // Ao publicar uma nova versão: aumente APP_VERSION aqui E a constante VERSION em sw.js.
-const APP_VERSION = '0.14.0';
+const APP_VERSION = '0.15.0';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -109,7 +109,7 @@ async function onImport(e) {
       const parsed = JSON.parse(await file.text());
       if (parsed.app !== 'bora-bibliar' || !parsed.data) throw new Error('Arquivo não é um backup do Bora Bibliar.');
       if (!confirm('Trazer os dados deste backup pra sua conta? Devocionais, agenda, desafios, leitura e XP serão substituídos pelos do arquivo.')) return;
-      ['devotionals', 'events', 'tags', 'challenges', 'bibleBooks', 'reading', 'xp'].forEach((k) => { if (parsed.data[k]) Store.set(k, parsed.data[k]); });
+      ['devotionals', 'devoPlan', 'events', 'tags', 'challenges', 'bibleBooks', 'reading', 'xp'].forEach((k) => { if (parsed.data[k]) Store.set(k, parsed.data[k]); });
       const name = parsed.data.profile?.name;
       if (name && !Store.get('profile').name) Store.set('profile', { ...Store.get('profile'), name });
     } else {
@@ -168,6 +168,7 @@ async function boot() {
   hydrateIcons();
   renderNav();
   if (Cloud.enabled) await Cloud.start(); // online: login + dados da conta
+  Devo.ensurePlan(); // plano de 30 dias começa no primeiro acesso
   renderMe();
   render();
   window.addEventListener('hashchange', render);

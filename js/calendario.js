@@ -92,7 +92,8 @@ const Cal = (() => {
     return {
       hol: holidaysOn(k),
       anns: anns().filter((a) => a.date === k).sort(byTime),
-      devo: Devo.entry(k).ref || '',
+      devo: Devo.entry(k).ref || Devo.suggestion(k)?.ref || '',
+      devoSug: !Devo.entry(k).ref && !!Devo.suggestion(k),
       evs: events().filter((e) => e.date === k).sort(byTime),
     };
   }
@@ -101,12 +102,12 @@ const Cal = (() => {
   let view = null; // { y, m }
   const timeTxt = (t) => (t ? `<b>${t}</b> ` : '');
   const chipAnn = (a) => `<button class="chip chip-ann" data-ann="${a.id}" title="${esc(KINDS[a.kind]?.label)}: ${esc(a.title)}">${icon(KINDS[a.kind]?.icon || 'megaphone', 12)}<span>${timeTxt(a.time)}${esc(a.title)}</span></button>`;
-  const chipDevo = (k, ref) => `<button class="chip chip-devo" data-devo-day="${k}" title="Leitura do devocional: ${esc(ref)}">${icon('bookOpen', 12)}<span>${esc(ref)}</span></button>`;
+  const chipDevo = (k, ref, sug) => `<button class="chip chip-devo ${sug ? 'chip-sug' : ''}" data-devo-day="${k}" title="${sug ? 'Sugestão de leitura (plano de 30 dias)' : 'Leitura do devocional'}: ${esc(ref)}">${sug ? '<span class="chip-ico" aria-hidden="true">💡</span>' : icon('bookOpen', 12)}<span>${esc(ref)}</span></button>`;
   const chipEv = (e) => `<button class="chip" data-ev="${e.id}" style="${tagStyle(e.tagId)}" title="${esc(e.title)}"><span>${timeTxt(e.time)}${esc(e.title)}</span></button>`;
 
   function cell(k, inMonth, today) {
     const it = itemsOn(k);
-    const chips = [...it.anns.map(chipAnn), ...(it.devo ? [chipDevo(k, it.devo)] : []), ...it.evs.map(chipEv)];
+    const chips = [...it.anns.map(chipAnn), ...(it.devo ? [chipDevo(k, it.devo, it.devoSug)] : []), ...it.evs.map(chipEv)];
     const MAX = 3;
     const shown = chips.slice(0, chips.length > MAX ? MAX - 1 : MAX);
     const more = chips.length - shown.length;
@@ -392,7 +393,7 @@ const Cal = (() => {
       ${it.devo ? `
         <button class="day-item" data-devo-day="${k}">
           <span class="day-item-ico">${icon('bookOpen', 16)}</span>
-          <span class="day-item-txt"><small>leitura do devocional</small><strong>${esc(it.devo)}</strong></span>
+          <span class="day-item-txt"><small>${it.devoSug ? `💡 sugestão de devocional · dia ${Devo.suggestion(k).day} de 30` : 'leitura do devocional'}</small><strong>${esc(it.devo)}</strong>${it.devoSug ? `<span class="d-notes">${esc(Devo.suggestion(k).tema)}</span>` : ''}</span>
           ${icon('chevronRight', 16)}
         </button>` : ''}
       ${it.evs.map((ev) => `

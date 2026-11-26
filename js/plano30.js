@@ -1,0 +1,36 @@
+// Plano de 30 dias de devocional: sugestão diária que começa no dia em que a pessoa entra no Hub.
+// Passagens seguem os blocos (subtítulos) da NVI, pra ler cada texto com contexto.
+// Formato: { ref, tema, pensar } — "pensar" é uma pergunta pra guiar a reflexão.
+
+const PLANO_30 = [
+  { ref: 'Gênesis 1:1–2:3', tema: 'No princípio, Deus', pensar: 'O que a criação mostra sobre quem Deus é?' },
+  { ref: 'Salmos 23 e João 10:11-18', tema: 'O Senhor é o meu pastor', pensar: 'Em que área da sua vida você precisa deixar Deus te conduzir?' },
+  { ref: 'João 3:1-21', tema: 'Jesus e Nicodemos', pensar: 'O que significa nascer de novo?' },
+  { ref: 'Josué 1:1-9', tema: 'Seja forte e corajoso', pensar: 'Qual medo Deus está te chamando a enfrentar com Ele?' },
+  { ref: 'Salmos 34:8-10 e Naum 1:7-9', tema: 'Provem e vejam como o Senhor é bom', pensar: 'Onde você já provou a bondade de Deus?' },
+  { ref: 'Mateus 6:5-15', tema: 'A oração que Jesus ensinou', pensar: 'Como está a sua vida de oração hoje?' },
+  { ref: 'Mateus 6:25-34 e Filipenses 4:4-9', tema: 'Não andem ansiosos', pensar: 'Que preocupação você pode entregar a Deus hoje?' },
+  { ref: 'Lucas 15:1-10', tema: 'A ovelha e a moeda perdidas', pensar: 'Como Deus se sente quando alguém volta pra Ele?' },
+  { ref: 'Lucas 15:11-32', tema: 'O filho perdido', pensar: 'Você se parece mais com o filho mais novo ou com o mais velho?' },
+  { ref: 'Mateus 5:1-12', tema: 'As bem-aventuranças', pensar: 'Qual dessas bem-aventuranças mais fala com você?' },
+  { ref: 'Mateus 5:13-16 e João 8:12', tema: 'Sal da terra e luz do mundo', pensar: 'Onde Deus te colocou pra brilhar?' },
+  { ref: 'Gálatas 5:16-26', tema: 'O fruto do Espírito', pensar: 'Qual fruto você mais precisa que cresça em você?' },
+  { ref: 'João 15:1-17', tema: 'A videira e os ramos', pensar: 'O que significa permanecer em Jesus no seu dia a dia?' },
+  { ref: '1 Coríntios 13', tema: 'O caminho do amor', pensar: 'Leia trocando “amor” pelo seu nome. Onde você precisa crescer?' },
+  { ref: 'Efésios 2:1-10', tema: 'Salvos pela graça', pensar: 'O que muda em você saber que a salvação é presente, não mérito?' },
+  { ref: '1 Samuel 3', tema: 'Deus chama Samuel', pensar: 'Você tem separado tempo pra ouvir a voz de Deus?' },
+  { ref: '1 Samuel 17:32-50', tema: 'Davi enfrenta Golias', pensar: 'Qual “gigante” você precisa enfrentar confiando em Deus?' },
+  { ref: 'Salmos 51:1-17 e 1 João 1:5-10', tema: 'Arrependimento e perdão', pensar: 'Há algo que você precisa confessar e deixar com Deus?' },
+  { ref: 'Marcos 4:35-41 e Salmos 46', tema: 'Jesus acalma a tempestade', pensar: 'Qual tempestade você está vivendo? Jesus está no barco.' },
+  { ref: 'Efésios 6:10-20', tema: 'A armadura de Deus', pensar: 'Qual peça da armadura você mais precisa vestir hoje?' },
+  { ref: 'Hebreus 11:1-16', tema: 'Pela fé', pensar: 'O que é ter fé quando ainda não se vê a resposta?' },
+  { ref: 'Romanos 8:28-39', tema: 'Mais que vencedores', pensar: 'O que pode te separar do amor de Deus?' },
+  { ref: 'Provérbios 3:1-12', tema: 'Confie no Senhor de todo o coração', pensar: 'Em que decisão você tem se apoiado só no seu entendimento?' },
+  { ref: '1 Reis 19:1-18', tema: 'Deus cuida de Elias', pensar: 'Como Deus cuida de nós quando estamos cansados?' },
+  { ref: 'João 4:1-26', tema: 'Jesus e a mulher samaritana', pensar: 'O que é a “água viva” que Jesus oferece?' },
+  { ref: 'João 13:1-17', tema: 'Jesus lava os pés dos discípulos', pensar: 'A quem você pode servir esta semana?' },
+  { ref: 'Lucas 23:26-49', tema: 'A crucificação de Jesus', pensar: 'O que a cruz te diz sobre o amor de Deus por você?' },
+  { ref: 'Lucas 24:1-12 e 1 Coríntios 15:3-8', tema: 'Ele ressuscitou!', pensar: 'Que esperança a ressurreição traz pra sua vida?' },
+  { ref: 'Mateus 28:16-20 e Atos 1:6-11', tema: 'Ide e fazei discípulos', pensar: 'Com quem você pode compartilhar o que aprendeu nestes dias?' },
+  { ref: 'Apocalipse 21:1-7', tema: 'Novos céus e nova terra', pensar: 'Como a promessa do fim muda o jeito de viver hoje?' },
+];

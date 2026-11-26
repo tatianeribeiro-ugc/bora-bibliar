@@ -5,7 +5,7 @@
 const Cloud = (() => {
   const cfg = window.BB_CONFIG || {};
   const enabled = !!(cfg.supabaseUrl && cfg.supabaseKey);
-  const PERSONAL = ['devotionals', 'events', 'tags', 'challenges', 'bibleBooks', 'reading', 'xp'];
+  const PERSONAL = ['devotionals', 'devoPlan', 'events', 'tags', 'challenges', 'bibleBooks', 'reading', 'xp'];
   const SHARED = ['books', 'announcements', 'encontroKeys', 'reviews', 'reviewLikes', 'wall', 'wallReacts', 'settings'];
   let sb = null;
   let user = null;
