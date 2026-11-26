@@ -15,7 +15,9 @@ const Library = (() => {
   };
   const STATUS = { quero: 'quero ler', lendo: 'lendo', concluido: 'concluído' };
 
-  const books = () => Store.get('books') || [];
+  // Estante sempre em ordem alfabética pelo título (ignora acentos e maiúsculas).
+  const books = () => (Store.get('books') || []).slice()
+    .sort((a, b) => (a.title || '').localeCompare(b.title || '', 'pt-BR', { sensitivity: 'base', numeric: true }));
   const reading = () => Store.get('reading') || {};
   const reviews = () => Store.get('reviews') || [];
   const likes = () => Store.get('reviewLikes') || {};
